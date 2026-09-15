@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JEJE STORE X KHII — Top Up Mobile Legends</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#0b1026,#17134b,#26145e);color:#fff;min-height:100vh}
+    .wrap{max-width:1050px;margin:auto;padding:24px}
+    header{padding:28px 0;text-align:center}
+    .logo{font-size:clamp(30px,7vw,58px);font-weight:900;letter-spacing:1px}
+    .logo span{color:#ffd43b}
+    .bio{margin-top:10px;color:#d9dcff;font-size:16px}
+    .card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:22px;padding:22px;box-shadow:0 15px 45px rgba(0,0,0,.25);backdrop-filter:blur(10px)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.wrap{padding:14px}}
+    h2{margin-bottom:16px;font-size:21px}
+    label{display:block;margin:12px 0 7px;font-weight:700;color:#e9eaff}
+    input,select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid #41477c;background:#0e1230;color:white;outline:none}
+    input:focus,select:focus{border-color:#ffd43b}
+    .products{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .product{padding:14px;border-radius:14px;background:#101536;border:1px solid #343b70;cursor:pointer;transition:.2s}
+    .product:hover,.product.active{border-color:#ffd43b;transform:translateY(-2px)}
+    .product b{display:block;color:#ffd43b;font-size:17px;margin-bottom:5px}
+    .product small{color:#c8cbdf}
+    .pay{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .pay label{margin:0}
+    .pay input{margin-right:7px;width:auto}
+    .summary{margin-top:18px;padding:16px;background:#0c112d;border-radius:15px}
+    .row{display:flex;justify-content:space-between;gap:15px;margin:8px 0;color:#d7daf0}
+    .total{font-size:22px;font-weight:900;color:#ffd43b;border-top:1px solid #363b66;padding-top:12px;margin-top:12px}
+    button{width:100%;margin-top:18px;padding:15px;border:0;border-radius:14px;background:#25d366;color:#07150b;font-size:17px;font-weight:900;cursor:pointer}
+    button:hover{filter:brightness(1.08)}
+    .note{font-size:12px;color:#bfc3dc;margin-top:12px;line-height:1.5}
+    footer{text-align:center;padding:25px;color:#9fa5c7;font-size:13px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">JEJE STORE <span>X KHII</span></div>
+    <div class="bio">TOPUP DIAMONDS & ADVAN SERVER • Mobile Legends: Bang Bang</div>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <h2>🛒 Form Top Up</h2>
+      <label for="player">User ID</label>
+      <input id="player" type="text" placeholder="Contoh: 123456789">
+
+      <label for="zone">Zone ID / Server</label>
+      <input id="zone" type="text" placeholder="Contoh: 1234">
+
+      <label>Pilih Produk</label>
+      <div class="products" id="products">
+        <div class="product" data-name="WDP" data-price="31000"><b>WDP</b><small>Rp31.000</small></div>
+        <div class="product" data-name="50 Diamonds" data-price="16000"><b>50 Diamonds</b><small>Rp16.000</small></div>
+        <div class="product" data-name="3 Set Advan Cabang" data-price="7000"><b>3 Set</b><small>Advan Cabang • Rp7.000</small></div>
+        <div class="product" data-name="Server Jepang" data-price="20000"><b>Server Jepang</b><small>Rp20.000</small></div>
+        <div class="product" data-name="5.000 BBC" data-price="20000"><b>5.000 BBC</b><small>Rp20.000</small></div>
+        <div class="product" data-name="10.000 BBC" data-price="40000"><b>10.000 BBC</b><small>Rp40.000</small></div>
+      </div>
+
+      <label for="pay">Metode Pembayaran</label>
+      <select id="pay">
+        <option value="">-- Pilih pembayaran --</option>
+        <option>DANA</option>
+        <option>GoPay</option>
+        <option>SeaBank</option>
+        <option>ShopeePay</option>
+        <option>BRI</option>
+        <option>AXIS</option>
+        <option>Telkomsel</option>
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>💳 Pembayaran</h2>
+      <p style="color:#d9dcff;line-height:1.6">
+        Setelah mengisi form, klik tombol pembayaran. Pesanan akan diteruskan ke WhatsApp owner untuk konfirmasi.
+      </p>
+
+      <div class="summary">
+        <div class="row"><span>Produk</span><strong id="sProduct">-</strong></div>
+        <div class="row"><span>User ID</span><strong id="sPlayer">-</strong></div>
+        <div class="row"><span>Metode</span><strong id="sPay">-</strong></div>
+        <div class="row total"><span>Total</span><strong id="sTotal">Rp0</strong></div>
+      </div>
+
+      <button onclick="order()">💬 BAYAR / ORDER VIA WHATSAPP</button>
+      <div class="note">
+        Nomor owner: +62 831-1200-5945<br>
+        Pembayaran: DANA • GoPay • SeaBank • ShopeePay • BRI • AXIS • Telkomsel
+      </div>
+    </section>
+  </div>
+
+  <footer>© 2026 JEJE STORE X KHII • Top Up Mobile Legends</footer>
+</div>
+
+<script>
+  let selected = null;
+  const money = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
+
+  document.querySelectorAll('.product').forEach(el=>{
+    el.addEventListener('click',()=>{
+      document.querySelectorAll('.product').forEach(x=>x.classList.remove('active'));
+      el.classList.add('active');
+      selected={name:el.dataset.name,price:Number(el.dataset.price)};
+      update();
+    });
+  });
+
+  document.getElementById('player').addEventListener('input',update);
+  document.getElementById('pay').addEventListener('change',update);
+
+  function update(){
+    document.getElementById('sProduct').textContent=selected?.name||'-';
+    document.getElementById('sPlayer').textContent=document.getElementById('player').value||'-';
+    document.getElementById('sPay').textContent=document.getElementById('pay').value||'-';
+    document.getElementById('sTotal').textContent=money(selected?.price||0);
+  }
+
+  function order(){
+    const player=document.getElementById('player').value.trim();
+    const zone=document.getElementById('zone').value.trim();
+    const pay=document.getElementById('pay').value;
+    if(!player || !zone || !selected || !pay){
+      alert('Lengkapi User ID, Zone ID/Server, produk, dan metode pembayaran terlebih dahulu.');
+      return;
+    }
+    const msg =
+`Halo JEJE STORE X KHII, saya mau order Top Up Mobile Legends.
+
+Produk: ${selected.name}
+Harga: ${money(selected.price)}
+User ID: ${player}
+Zone ID/Server: ${zone}
+Metode Pembayaran: ${pay}
+
+Mohon diproses. Terima kasih.`;
+    window.open('https://wa.me/6283112005945?text='+encodeURIComponent(msg),'_blank');
+  }
+</script>
+</body>
+</html>
